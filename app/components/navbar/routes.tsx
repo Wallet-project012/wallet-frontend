@@ -6,11 +6,18 @@ export const NavbarRoutes: NavbarRoute[] = [
   {
     path: "/",
     name: "Home",
-    icon: <TbHome2 color="orange" size="2rem" />,
+    icon: (
+      <TbHome2 className="text-dark-main dark:text-primary-main" size="2rem" />
+    ),
   },
   {
     path: "/dashboard",
     name: "Dashboard",
-    icon: <LuLayoutDashboard color="orange" size="2rem" />,
+    icon: (
+      <LuLayoutDashboard
+        className="text-dark-main dark:text-primary-main"
+        size="2rem"
+      />
+    ),
   },
 ];

@@ -6,11 +6,21 @@ export const SidebarRoutes: SidebarRoute[] = [
   {
     path: "/",
     name: "Home",
-    icon: <TbHome2 color="orange" size="2rem" />,
+    icon: (
+      <TbHome2
+        className="text-dark-main dark:text-primary-main"
+        size="1.5rem"
+      />
+    ),
   },
   {
     path: "/dashboard",
     name: "Dashboard",
-    icon: <LuLayoutDashboard color="orange" size="2rem" />,
+    icon: (
+      <LuLayoutDashboard
+        className="text-dark-main dark:text-primary-main"
+        size="1.5rem"
+      />
+    ),
   },
 ];
