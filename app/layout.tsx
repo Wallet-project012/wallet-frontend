@@ -1,5 +1,8 @@
+import React from "react";
+
 import type { Metadata } from "next";
 import "./globals.css";
+import ThemeProvider from "@/theme/theme-provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -12,8 +15,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
