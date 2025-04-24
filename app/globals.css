@@ -10,7 +10,7 @@
   /*light*/
   --color-light-50: #ffffff;
   --color-light-100: #fffefa;
-  --color-light-200: #fffcf2; /* main*/
+  --color-light-main: #fffcf2;
   --color-light-300: #f2f0e4;
   --color-light-400: #e6e0ce;
 
@@ -19,13 +19,13 @@
   --color-dark-600: #5e5b54;
   --color-dark-700: #47443e;
   --color-dark-800: #302e29;
-  --color-dark-900: #252422; /* main*/
+  --color-dark-main: #252422;
 
   /* primary*/
   --color-primary-200: #ffc1aa;
   --color-primary-300: #ff9c7c;
   --color-primary-400: #ff774e;
-  --color-primary-500: #eb5e28; /* main*/
+  --color-primary-main: #eb5e28;
   --color-primary-600: #c74c1e;
   --color-primary-700: #a33b17;
   --color-primary-800: #7f2a10;
@@ -34,7 +34,7 @@
   --color-secondary-200: #e0ddd5;
   --color-secondary-300: #d1cdc1;
   --color-secondary-400: #c4bfb3;
-  --color-secondary-500: #ccc5b9; /* main*/
+  --color-secondary-main: #ccc5b9;
   --color-secondary-600: #b3ac9f;
   --color-secondary-700: #999285;
   --color-secondary-800: #7f796c;
@@ -43,7 +43,7 @@
   --color-success-200: #a7f3d0;
   --color-success-300: #6ee7b7;
   --color-success-400: #34d399;
-  --color-success-500: #10b981; /* main*/
+  --color-success-main: #10b981;
   --color-success-600: #059669;
   --color-success-700: #047857;
   --color-success-800: #065f46;
@@ -52,7 +52,7 @@
   --color-error-200: #fecaca;
   --color-error-300: #fca5a5;
   --color-error-400: #f87171;
-  --color-error-500: #ef4444; /* main*/
+  --color-error-main: #ef4444;
   --color-error-600: #dc2626;
   --color-error-700: #b91c1c;
   --color-error-800: #991b1b;
@@ -61,7 +61,7 @@
   --color-warning-200: #fde68a;
   --color-warning-300: #fcd34d;
   --color-warning-400: #fbbf24;
-  --color-warning-500: #f59e0b; /* main*/
+  --color-warning-main: #f59e0b;
   --color-warning-600: #d97706;
   --color-warning-700: #b45309;
   --color-warning-800: #92400e;
@@ -70,7 +70,7 @@
   --color-info-200: #bfdbfe;
   --color-info-300: #93c5fd;
   --color-info-400: #60a5fa;
-  --color-info-500: #3b82f6; /* main*/
+  --color-info-main: #3b82f6;
   --color-info-600: #2563eb;
   --color-info-700: #1d4ed8;
   --color-info-800: #1e40af;
