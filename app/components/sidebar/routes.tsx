@@ -1,23 +1,69 @@
-import { TbHome2 } from "react-icons/tb";
-import { LuLayoutDashboard } from "react-icons/lu";
+import {
+  LuCalendarClock,
+  LuCreditCard,
+  LuLayoutDashboard,
+  LuSettings,
+} from "react-icons/lu";
 import { SidebarRoute } from "./types";
+import { BiSupport } from "react-icons/bi";
+import { MdOutlineAccountCircle } from "react-icons/md";
 
 export const SidebarRoutes: SidebarRoute[] = [
   {
-    path: "/",
-    name: "Home",
+    path: "/dashboard",
+    name: "Dashboard",
     icon: (
-      <TbHome2
+      <LuLayoutDashboard
         className="text-dark-main dark:text-primary-main"
         size="1.5rem"
       />
     ),
   },
   {
-    path: "/dashboard",
-    name: "Dashboard",
+    path: "/dashboard/card-management",
+    name: "Card management",
     icon: (
-      <LuLayoutDashboard
+      <LuCreditCard
+        className="text-dark-main dark:text-primary-main"
+        size="1.5rem"
+      />
+    ),
+  },
+  {
+    path: "/dashboard/settings",
+    name: "Settings",
+    icon: (
+      <LuSettings
+        className="text-dark-main dark:text-primary-main"
+        size="1.5rem"
+      />
+    ),
+  },
+  {
+    path: "/dashboard/financial-calender",
+    name: "Financial calender",
+    icon: (
+      <LuCalendarClock
+        className="text-dark-main dark:text-primary-main"
+        size="1.5rem"
+      />
+    ),
+  },
+  {
+    path: "/dashboard/profile",
+    name: "Profile",
+    icon: (
+      <MdOutlineAccountCircle
+        className="text-dark-main dark:text-primary-main"
+        size="1.5rem"
+      />
+    ),
+  },
+  {
+    path: "/dashboard/support",
+    name: "Support",
+    icon: (
+      <BiSupport
         className="text-dark-main dark:text-primary-main"
         size="1.5rem"
       />

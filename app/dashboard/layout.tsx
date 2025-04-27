@@ -13,10 +13,12 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main>
+    <main className="w-full">
       <Sidebar />
       <Navbar />
-      <div className="mt-[72px] ml-[256px]">{children}</div>
+      <div className="mt-[72px] w-full p-2 bg-light-400 h-[calc(100vh-72px)] overflow-y-auto dark:bg-dark-500">
+        {children}
+      </div>
     </main>
   );
 }
