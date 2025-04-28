@@ -14,10 +14,12 @@ export default function DashboardLayout({
 }) {
   return (
     <main className="w-full">
-      <Sidebar />
       <Navbar />
-      <div className="mt-[72px] w-full p-2 bg-light-400 h-[calc(100vh-72px)] overflow-y-auto dark:bg-dark-500">
-        {children}
+      <div className="flex flex-wrap w-full h-screen overflow-hidden bg-primary-400 dark:bg-dark-500">
+        <Sidebar />
+        <div className="mt-[72px] p-2 grow bg-light-400 h-[calc(100vh-72px)] overflow-y-auto dark:bg-dark-500">
+          {children}
+        </div>
       </div>
     </main>
   );
