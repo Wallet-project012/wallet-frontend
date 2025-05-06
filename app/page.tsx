@@ -1,5 +1,6 @@
 import ThemeToggle from "@/theme/theme-toggle";
 import Link from "next/link";
+import RegisterForm from "../components/form/Form";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
             Dashborad
           </button>
         </Link>
+        <RegisterForm />
       </main>
     </div>
   );
