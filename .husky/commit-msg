@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Get commit message file path
+COMMIT_MSG_FILE=$(git rev-parse --git-path COMMIT_EDITMSG)
+
+# Run commitlint and suppress help text
+npx --no commitlint --edit "$COMMIT_MSG_FILE" 2>&1 | grep -v '^Options:' | grep -v '^Usage:'
+
+# Exit with commitlint's status code
+exit $?

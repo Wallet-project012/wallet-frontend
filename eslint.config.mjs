@@ -1,24 +1,10 @@
-import js from '@eslint/js';
-import globals from 'globals';
-import tseslint from 'typescript-eslint';
-import pluginReact from 'eslint-plugin-react';
-import { defineConfig } from 'eslint/config';
-
-export default defineConfig([
-  { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'], plugins: { js }, extends: ['js/recommended'] },
-  { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'], languageOptions: { globals: globals.browser } },
-  tseslint.configs.recommended,
-  pluginReact.configs.flat.recommended,
-]);
-
-module.exports = {
-  // ...
-  settings: {
-    react: {
-      version: 'detect',
-    },
-  },
-  rules: {
-    'react/react-in-jsx-scope': 'off', // 👈 disable this rule
-  },
+// commitlint.config.js
+export const extendConfig = ['@commitlint/config-conventional'];
+export const rules = {
+  'type-enum': [
+    2,
+    'always',
+    ['feat', 'fix', 'docs', 'style', 'refactor', 'test', 'chore', 'revert'],
+  ],
+  'subject-case': [2, 'always', 'sentence-case'],
 };
