@@ -1,10 +1,10 @@
-"use client";
-import React from "react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { registerFormSchema } from "@/schemas/formSchema";
-import { FormData } from "./type";
-import { Button } from "@/components/ui/button";
+'use client';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { registerFormSchema } from '@/schemas/formSchema';
+import { FormData } from './type';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -13,89 +13,49 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "../ui/input";
+} from '@/components/ui/form';
+import { Input } from '../ui/input';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { createUser } from '@/lib/api/registerUser';
+import { useRouter } from 'next/navigation';
 
 const RegisterForm = () => {
+  const queryClient = useQueryClient();
+
+  const route = useRouter();
+
   const form = useForm({
     resolver: yupResolver(registerFormSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      number: 0,
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+      number: '',
+    },
+  });
+
+  const { mutate, isPending, error } = useMutation({
+    mutationFn: createUser,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['users'] });
+      form.reset();
     },
   });
 
   const onSubmit = (data: FormData): void => {
     console.log(data);
+    mutate(data);
+    // route.push('/dashboard/profile');
   };
 
   return (
-    // <form onSubmit={handleSubmit(onSubmit)}>
-    //   <div>
-    //     <label>First Name</label>
-    //     <Controller
-    //       name="firstName"
-    //       control={control}
-    //       render={({ field }) => <input type="text" {...field} placeholder="First Name" />}
-    //     />
-    //     {errors.firstName && <p>{errors.firstName.message}</p>}
-    //   </div>
-    //   <div>
-    //     <label>Last Name</label>
-    //     <Controller
-    //       name="lastName"
-    //       control={control}
-    //       render={({ field }) => <input type="text" {...field} placeholder="Last Name" />}
-    //     />
-    //     {errors.lastName && <p>{errors.lastName.message}</p>}
-    //   </div>
-    //   <div>
-    //     <label>Email</label>
-    //     <Controller
-    //       name="email"
-    //       control={control}
-    //       render={({ field }) => <input type="email" {...field} placeholder="email" />}
-    //     />
-    //     {errors.email && <p>{errors.email.message}</p>}
-    //   </div>
-    //   <div>
-    //     <label>Password</label>
-    //     <Controller
-    //       name="password"
-    //       control={control}
-    //       render={({ field }) => <input type="password" {...field} placeholder="password" />}
-    //     />
-    //     {errors.password && <p>{errors.password.message}</p>}
-    //   </div>
-    //   <div>
-    //     <label>Confirm password</label>
-    //     <Controller
-    //       name="confirmPassword"
-    //       control={control}
-    //       render={({ field }) => (
-    //         <input {...field} type="password" placeholder="confirm password " />
-    //       )}
-    //     />
-    //     {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
-    //   </div>
-    //   <div>
-    //     <label>Number</label>
-    //     <Controller
-    //       name="number"
-    //       control={control}
-    //       render={({ field }) => <input type="number" {...field} placeholder="number " />}
-    //     />
-    //     {errors.number && <p>{errors.number.message}</p>}
-    //   </div>
-
-    //   <button type="submit">Submit</button>
-    // </form>
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex flex-col gap-4 border p-4 rounded-md "
+      >
         <FormField
           control={form.control}
           name="firstName"
@@ -103,11 +63,9 @@ const RegisterForm = () => {
             <FormItem>
               <FormLabel>firstName&quot;</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="First name" {...field} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
+              <FormDescription>enter your first name.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -119,11 +77,9 @@ const RegisterForm = () => {
             <FormItem>
               <FormLabel>last name&quot;</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="Last name" {...field} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
+              <FormDescription>enter your last name.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -135,11 +91,9 @@ const RegisterForm = () => {
             <FormItem>
               <FormLabel>email&quot;</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="Email" type="email" {...field} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
+              <FormDescription>enter your email.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -151,11 +105,9 @@ const RegisterForm = () => {
             <FormItem>
               <FormLabel>password&quot;</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="Password" type="password" {...field} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
+              <FormDescription>enter your password.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -167,11 +119,9 @@ const RegisterForm = () => {
             <FormItem>
               <FormLabel>confirmPassword&quot;</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="confirmPassword" type="password" {...field} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
+              <FormDescription>confirm your password.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -183,16 +133,17 @@ const RegisterForm = () => {
             <FormItem>
               <FormLabel>number&quot;</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="Number" type="number" {...field} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
-              <FormMessage />
+              <FormDescription>enter your phone number.</FormDescription>
+              <FormMessage title="errorrrrr" />
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit">{isPending ? 'Submitting...' : 'Register'}</Button>
+
+        {/* API Error */}
+        {error instanceof Error && <p className="text-error-600 mt-2">Error: {error.message}</p>}
       </form>
     </Form>
   );
