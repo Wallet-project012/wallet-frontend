@@ -1,26 +1,79 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-*: initial;
+  /* --color-background: var(--background); // need to be change */
+  /* --color-foreground: var(--foreground); // need to be change */
+  /* --font-sans: var(--font-geist-sans); // need to be change */
+  /* --font-mono: var(--font-geist-mono); // need to be change */
+
+  /*light*/
+  --color-light-50: #ffffff;
+  --color-light-100: #fffefa;
+  --color-light-main: #fffcf2;
+  --color-light-300: #f2f0e4;
+  --color-light-400: #e6e0ce;
+
+  /*dark*/
+  --color-dark-500: #75716a;
+  --color-dark-600: #5e5b54;
+  --color-dark-700: #47443e;
+  --color-dark-800: #302e29;
+  --color-dark-main: #252422;
+
+  /* primary*/
+  --color-primary-200: #ffc1aa;
+  --color-primary-300: #ff9c7c;
+  --color-primary-400: #ff774e;
+  --color-primary-main: #eb5e28;
+  --color-primary-600: #c74c1e;
+  --color-primary-700: #a33b17;
+  --color-primary-800: #7f2a10;
+
+  /*secondary*/
+  --color-secondary-200: #e0ddd5;
+  --color-secondary-300: #d1cdc1;
+  --color-secondary-400: #c4bfb3;
+  --color-secondary-main: #ccc5b9;
+  --color-secondary-600: #b3ac9f;
+  --color-secondary-700: #999285;
+  --color-secondary-800: #7f796c;
+
+  /*success*/
+  --color-success-200: #a7f3d0;
+  --color-success-300: #6ee7b7;
+  --color-success-400: #34d399;
+  --color-success-main: #10b981;
+  --color-success-600: #059669;
+  --color-success-700: #047857;
+  --color-success-800: #065f46;
+
+  /*error-danger*/
+  --color-error-200: #fecaca;
+  --color-error-300: #fca5a5;
+  --color-error-400: #f87171;
+  --color-error-main: #ef4444;
+  --color-error-600: #dc2626;
+  --color-error-700: #b91c1c;
+  --color-error-800: #991b1b;
+
+  /*warning*/
+  --color-warning-200: #fde68a;
+  --color-warning-300: #fcd34d;
+  --color-warning-400: #fbbf24;
+  --color-warning-main: #f59e0b;
+  --color-warning-600: #d97706;
+  --color-warning-700: #b45309;
+  --color-warning-800: #92400e;
+
+  /*info*/
+  --color-info-200: #bfdbfe;
+  --color-info-300: #93c5fd;
+  --color-info-400: #60a5fa;
+  --color-info-main: #3b82f6;
+  --color-info-600: #2563eb;
+  --color-info-700: #1d4ed8;
+  --color-info-800: #1e40af;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+@custom-variant dark (&:where(.dark, .dark *));
