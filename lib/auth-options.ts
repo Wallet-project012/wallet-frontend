@@ -1,41 +1,30 @@
-import type { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import type { NextAuthOptions } from 'next-auth';
 import axios from 'axios';
 
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
-      name: 'Credentials',
+      name: 'credentials',
       credentials: {
-        email: { label: 'Email', type: 'email' },
-        password: { label: 'Password', type: 'password' },
+        email: {},
+        password: {},
       },
       async authorize(credentials) {
-        try {
-          const res = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/login`, {
-            email: credentials?.email,
-            password: credentials?.password,
-          });
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
+          email: credentials?.email,
+          password: credentials?.password,
+        });
 
-          if (res.data?.user) {
-            return res.data.user; // Must return a user object
-          }
-
-          return null;
-        } catch (err) {
-          return null;
-        }
+        if (res.data?.user) return res.data.user;
+        return null;
       },
     }),
   ],
-  session: {
-    strategy: 'jwt',
-  },
+  session: { strategy: 'jwt' },
   callbacks: {
     async jwt({ token, user }) {
-      if (user) {
-        token.user = user;
-      }
+      if (user) token.user = user;
       return token;
     },
     async session({ session, token }) {
@@ -43,8 +32,6 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
-  pages: {
-    signIn: '/login',
-  },
+  pages: { signIn: '/login' },
   secret: process.env.NEXTAUTH_SECRET,
 };

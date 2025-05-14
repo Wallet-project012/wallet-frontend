@@ -1,6 +1,6 @@
 import ThemeToggle from '@/theme/theme-toggle';
 import Link from 'next/link';
-import RegisterForm from '../components/form/Form';
+import RegisterForm from '../components/form/RegisterForm';
 
 export default function Home() {
   return (
@@ -12,7 +12,12 @@ export default function Home() {
             Dashborad...
           </button>
         </Link>
-        <RegisterForm />
+        <Link href="/register">
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer">
+            register form...
+          </button>
+        </Link>
+        {/* <RegisterForm /> */}
       </main>
     </div>
   );

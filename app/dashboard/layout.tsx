@@ -6,6 +6,8 @@ import { authOptions } from '@/lib/auth-options';
 import { redirect } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { signOut } from 'next-auth/react';
+import { getUserOrRedirect } from '@/utils/get-user-or-redirect';
+import LogoutButton from '@/components/buttons/LogoutButton';
 
 export const metadata: Metadata = {
   title: 'Dashboard',
@@ -14,15 +16,11 @@ export const metadata: Metadata = {
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   // after backend set up
-  // const session = await getServerSession(authOptions);
+  // const user = await getUserOrRedirect();
 
-  // if (!session) {
-  //   redirect('/login');
-  // }
   return (
     <main className="w-full">
-      {/* after backend set */}
-      {/* <Button onClick={() => signOut({ callbackUrl: '/login' })}>Log out</Button> */}
+      <LogoutButton />
       <Navbar />
       <div className="flex flex-wrap w-full h-screen overflow-hidden bg-primary-400 dark:bg-dark-500">
         <Sidebar />

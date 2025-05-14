@@ -1,4 +1,5 @@
 'use client';
+
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -15,15 +16,9 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '../ui/input';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createUser } from '@/lib/api/registerUser';
-import { useRouter } from 'next/navigation';
+import { useRegister } from '@/hooks/useRegister';
 
 const RegisterForm = () => {
-  const queryClient = useQueryClient();
-
-  const route = useRouter();
-
   const form = useForm({
     resolver: yupResolver(registerFormSchema),
     defaultValues: {
@@ -35,26 +30,15 @@ const RegisterForm = () => {
       number: '',
     },
   });
+  const mutation = useRegister();
 
-  const { mutate, isPending, error } = useMutation({
-    mutationFn: createUser,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['users'] });
-      form.reset();
-    },
-  });
-
-  const onSubmit = (data: FormData): void => {
-    console.log(data);
-    mutate(data);
-    // route.push('/dashboard/profile');
-  };
+  const onSubmit = (data: FormData) => mutation.mutate(data);
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-4 border p-4 rounded-md "
+        className="flex flex-col gap-4 border p-6 rounded-md w-xl shadow-2xl  "
       >
         <FormField
           control={form.control}
@@ -140,10 +124,14 @@ const RegisterForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">{isPending ? 'Submitting...' : 'Register'}</Button>
+        <Button className="w-60 self-center" type="submit">
+          {mutation.isPending ? 'Submitting...' : 'Register'}
+        </Button>
 
         {/* API Error */}
-        {error instanceof Error && <p className="text-error-600 mt-2">Error: {error.message}</p>}
+        {mutation.error instanceof Error && (
+          <p className="text-error-600 mt-2">Error: {mutation.error.message}</p>
+        )}
       </form>
     </Form>
   );
