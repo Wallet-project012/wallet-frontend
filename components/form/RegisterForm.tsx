@@ -124,7 +124,7 @@ const RegisterForm = () => {
             </FormItem>
           )}
         />
-        <Button className="w-60 self-center" type="submit">
+        <Button className="w-60 self-center" type="submit" disabled={mutation.isPending}>
           {mutation.isPending ? 'Submitting...' : 'Register'}
         </Button>
 

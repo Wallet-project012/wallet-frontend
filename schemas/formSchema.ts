@@ -18,3 +18,8 @@ export const registerFormSchema = yup.object().shape({
     .required('Confirm password is required'),
   number: yup.string().required('Number is required'),
 });
+
+export const loginFormSchema = yup.object().shape({
+  email: yup.string().email('Invalid email').required('Email is required'),
+  password: yup.string().required('Password is required'),
+});

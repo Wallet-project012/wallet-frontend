@@ -6,3 +6,8 @@ export interface FormData {
   confirmPassword: string;
   number: string;
 }
+
+export type LoginData = {
+  email: string;
+  password: string;
+};
