@@ -16,7 +16,11 @@ export const authOptions: NextAuthOptions = {
           password: credentials?.password,
         });
 
-        if (res.data?.user) return res.data.user;
+        const { user, token } = res.data;
+
+        if (user && token) {
+          return { ...user, token }; // Include token in returned object
+        }
         return null;
       },
     }),
@@ -24,11 +28,15 @@ export const authOptions: NextAuthOptions = {
   session: { strategy: 'jwt' },
   callbacks: {
     async jwt({ token, user }) {
-      if (user) token.user = user;
+      if (user) {
+        token.user = user;
+        // token.accessToken = user.token; // Store backend token
+      }
       return token;
     },
     async session({ session, token }) {
-      session.user = token.user as any;
+      // session.user = token.user;
+      // session.accessToken = token.accessToken; // Expose token to client
       return session;
     },
   },
