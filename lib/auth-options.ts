@@ -24,6 +24,29 @@ export const authOptions: NextAuthOptions = {
         return null;
       },
     }),
+    CredentialsProvider({
+      id: 'otp',
+      name: 'OTP Login',
+      credentials: {
+        number: { label: 'Phone Number', type: 'text' },
+        otp: { label: 'OTP Code', type: 'text' },
+      },
+      async authorize(credentials) {
+        const { number, otp } = credentials ?? {};
+
+        // TODO: Replace with your own backend OTP verification logic
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/verify-otp`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ number, otp }),
+        });
+
+        if (!res.ok) return null;
+
+        const user = await res.json();
+        return user; // must return { id, name, email } at minimum
+      },
+    }),
   ],
   session: { strategy: 'jwt' },
   callbacks: {

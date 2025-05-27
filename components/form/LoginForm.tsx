@@ -17,6 +17,7 @@ import {
 import { Input } from '../ui/input';
 import { Switch } from '../ui/switch';
 import { useState } from 'react';
+import { InputOTPControlled } from '../ControlledInputOtp';
 
 const LoginForm = () => {
   const [phoneLogin, setPhoneLogin] = useState(false);
@@ -35,19 +36,6 @@ const LoginForm = () => {
     setPhoneLogin(prev => !prev);
   }
 
-  if (phoneLogin) {
-    return (
-      <div className="flex justify-start items-center gap-3">
-        <Switch
-          title="login with phone number"
-          checked={phoneLogin}
-          onCheckedChange={toggleLogin}
-        />
-        <p>login with phone number</p>
-      </div>
-    );
-  }
-
   return (
     <Form {...form}>
       <form
@@ -63,38 +51,51 @@ const LoginForm = () => {
           <p>login with phone number</p>
         </div>
 
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email&quot;</FormLabel>
-              <FormControl>
-                <Input placeholder="email" {...field} />
-              </FormControl>
-              <FormDescription>enter your email.</FormDescription>
-              <FormMessage />
-            </FormItem>
+        <div>
+          {phoneLogin ? (
+            <div className="flex justify-start items-center gap-8 flex-col">
+              <p>login with phone number</p>
+              <InputOTPControlled />
+            </div>
+          ) : (
+            <>
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email&quot;</FormLabel>
+                    <FormControl>
+                      <Input placeholder="email" {...field} />
+                    </FormControl>
+                    <FormDescription>enter your email.</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>password&quot;</FormLabel>
+                    <FormControl>
+                      <Input placeholder="password" {...field} />
+                    </FormControl>
+                    <FormDescription>enter your password.</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </>
           )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>password&quot;</FormLabel>
-              <FormControl>
-                <Input placeholder="password" {...field} />
-              </FormControl>
-              <FormDescription>enter your password.</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        </div>
 
-        <Button className="w-60 self-center" type="submit" disabled={mutation.isPending}>
-          {mutation.isPending ? 'Submitting...' : 'Register'}
-        </Button>
+        {!phoneLogin && (
+          <Button className="w-60 self-center" type="submit" disabled={mutation.isPending}>
+            {mutation.isPending ? 'Submitting...' : 'Register'}
+          </Button>
+        )}
 
         {/* API Error */}
         {mutation.error instanceof Error && (
